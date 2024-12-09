@@ -15,8 +15,10 @@ class Config(BaseSettings):
     LOG_LEVEL: str = Field("INFO")
     AZURE_CONTAINER_REGISTRY: str = Field(...)
     AZURE_WEBAPP_NAME: str = Field(...)
+    PORT: int
 
     class Config:
         env_file = ".env"
+        extra = "allow"
 
 configuration = Config()
