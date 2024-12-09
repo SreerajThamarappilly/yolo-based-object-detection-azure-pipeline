@@ -5,6 +5,7 @@ This project provides an advanced YOLO (You Only Look Once) based object detecti
 ## Features
 
 - **YOLOv5 Object Detection**: Pretrained model for quick inference and capability to fine-tune with custom data.
+- **PyTorch**: Used for building and training deep learning models. PyTorch powers the YOLO model for training and inference. It handles all tensor computations, model updates, and GPU acceleration. The ultralytics YOLO implementation relies on PyTorch to handle neural network computations.
 - **REST API Endpoints**: Easy inference using FastAPI endpoints.
 - **Azure Deployment**: Instructions and service utilities for deploying to Azure Web Apps or Azure Container Instances.
 - **Training Service**: Train/fine-tune the YOLO model on custom datasets.
@@ -135,7 +136,7 @@ Once training is complete, evaluate the results:
 runs\detect\train5\weights\best.pt
 ```
 
-Now, you’ve successfully generated labels for your dataset, trained the YOLO model, and can test it with new images!
+Now, you’ve successfully generated labels for the dataset, trained the YOLO model, and can test it with new images!
 
 ## Running the Application Locally
 
@@ -165,16 +166,16 @@ pytest src/tests/
 
 **Further Training (Fine-Tuning)**:
 
-To train or fine-tune the model on your custom dataset:
-- Place your dataset images and labels in src/data/training_data/.
-- Update dataset.yaml with paths to your images and labels.
+To train or fine-tune the model on the custom dataset:
+- Place the dataset images and labels in src/data/training_data/.
+- Update dataset.yaml with paths to the images and labels.
 - Run the training script:
 
 ```bash
 python src/services/training_service.py
 ```
 
-This will load the YOLO model, update it with your data, and produce new weights in src/models/yolo/runs/train/exp/weights/best.pt.
+This will load the YOLO model, update it with the data, and produce new weights in src/models/yolo/runs/train/exp/weights/best.pt.
 
 **Deploying to Azure**:
 
@@ -182,6 +183,8 @@ This will load the YOLO model, update it with your data, and produce new weights
 
 ```bash
 docker build -t myregistry.azurecr.io/yolo-app:latest .
+docker run -p 8000:8000 myregistry.azurecr.io/yolo-app:latest # Run the container locally and access http://127.0.0.1:8000/docs
+docker login myregistry.azurecr.io
 docker push myregistry.azurecr.io/yolo-app:latest
 ```
 
@@ -200,7 +203,7 @@ az webapp config appsettings set --resource-group myResourceGroup --name myyolow
 
 - **Access web app**:
 
-Open https://myyolowebapp.azurewebsites.net/docs in your browser for the API docs.
+Open https://myyolowebapp.azurewebsites.net/docs in the browser for the API docs.
 
 ## License
 
