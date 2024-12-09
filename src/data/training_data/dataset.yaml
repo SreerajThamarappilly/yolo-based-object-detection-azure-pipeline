@@ -1,0 +1,8 @@
+# dataset.yaml
+# YOLO dataset configuration file
+train: images/train
+val: images/val
+# Optional: test: images/test
+
+names:
+  0: person
